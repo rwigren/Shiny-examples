@@ -1,6 +1,7 @@
 #' A very simple example of the Shiny structure using the Iris data set.
 
 library(shiny)
+library(bslib)
 library(ggplot2)
 library(dplyr)
 
