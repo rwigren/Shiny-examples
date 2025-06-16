@@ -19,7 +19,9 @@ gapm <- gapminder::gapminder |>
 
 # Map of Africa from natural earth data set
 afr_map <- rnaturalearth::ne_countries(continent = "africa") |> 
-  select(iso_a3)
+  select(iso_a3, )
+
+
 
 ui <- page_sidebar(
   title = "ggiraph example: Gapminder data exploration",
@@ -32,26 +34,26 @@ ui <- page_sidebar(
   layout_columns(
     card(girafeOutput("map"), textOutput("descr")),
     card(girafeOutput("measure_ts")),
-    col_widths = c(6,6),
-
-    
+    col_widths = c(6,6)
   )
-  )
+)
 
 
 
 server <- function(input, output, session){
   selected <- NULL
   
+  # Selected countries saved for changes in measure variable
   observeEvent(input$map_selected, {
     selected <<- input$map_selected
   }, ignoreNULL = FALSE)
   
+  # Map output, joins data and geography and displays a color-coded map 
   output$map <- renderGirafe({
     g <- 
       gapm |> 
-      filter(year == !!input$year) |> 
-      right_join(afr_map, join_by(iso_alpha == iso_a3)) |> 
+      filter(year == !!input$year) |>
+      right_join(afr_map, by = join_by(iso_alpha == iso_a3)) |> 
       
       ggplot(aes(fill = !!input$measure, 
                  geometry = geometry, 
@@ -59,12 +61,12 @@ server <- function(input, output, session){
                  tooltip = paste("Country: ", country, "\n", input$measure, ": ", !!input$measure))) +
         geom_sf_interactive(hover_nearest=TRUE) +
         labs(x = "Latitude", y = "Longitude")
-    
 
     girafe(ggobj = g, options = list(opts_selection(selected = selected), 
                                      opts_hover(nearest_distance = 30)))
   })
   
+  # Output for time series 
   output$measure_ts <- renderGirafe({
     req(input$map_selected)
     g <- 
@@ -78,7 +80,7 @@ server <- function(input, output, session){
     girafe(ggobj = g, options = list(opts_hover(nearest_distance = 30)))
   })
   
-  
+  # Descriptive text, static
   output$descr <- renderText("Select countries to view historical data in a time series; Multiple can be selected at a time.")
   
 }
