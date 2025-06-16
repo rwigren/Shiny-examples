@@ -5,19 +5,22 @@ library(bslib)
 library(ggplot2)
 library(dplyr)
 
-species <- unique(iris$Species)
+iris.species <- unique(iris$Species)
+iris.numeric <- iris |>  select(-Species)
 
 
 # UI is set up with two variable selection inputs to choose y and x axis
 # and a check box group to choose which species to show.
 ui <- page_sidebar(
+  title = "Iris: Simple example",
+  
   sidebar = sidebar(
-    varSelectInput("xvar", "X variable", iris, selected = "Petal.Length"),
-    varSelectInput("yvar", "Y Variable", iris, selected = "Petal.Width"),
-    checkboxGroupInput("species", "Species", species, selected = species)
+    varSelectInput("xvar", "X variable", iris.numeric, selected = "Petal.Length"),
+    varSelectInput("yvar", "Y Variable", iris.numeric, selected = "Petal.Width"),
+    checkboxGroupInput("species", "Species", iris.species, selected = iris.species)
   ),
   # An output for a plot is added to the UI
-  plotOutput("scatter")
+  plotOutput("scatter", width="700px")
 )
 
 
