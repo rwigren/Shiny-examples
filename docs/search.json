@@ -1,0 +1,23 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Shiny examples",
+    "section": "",
+    "text": "This document contains short explanations and links to a couple of example Shiny apps created by me. These are used as a showcase and as a reference.\nAn example of a Shiny app using ggiraph for interactivity, e.g. selections and tooltips. Displays a coreopleth map of Africa for the selected measurement and year (one of GDP per capita, population or life expectancy). Countries can further be selected on the map to have their measurement shown in a time series over all available years."
+  },
+  {
+    "objectID": "index.html#simple-iris-go-to",
+    "href": "index.html#simple-iris-go-to",
+    "title": "Shiny examples",
+    "section": "Simple Iris Go to",
+    "text": "Simple Iris Go to\n\nA simple example of a Shiny app using the Iris dataset. Shows the structure of a Shiny app – the ui and server functions – in a basic manner with accompanying explanations in code. Mainly used for reference use of the basic Shiny structure."
+  },
+  {
+    "objectID": "index.html#ggiraph-map-go-to",
+    "href": "index.html#ggiraph-map-go-to",
+    "title": "Shiny examples",
+    "section": "ggiraph map Go to",
+    "text": "ggiraph map Go to"
+  }
+]

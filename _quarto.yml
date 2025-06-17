@@ -1,0 +1,14 @@
+project:
+  type: website
+  output-dir: docs
+  
+website:
+  title: "Shiny examples"
+  open-graph: true
+  navbar:
+    search: false
+    background: secondary
+   
+format:
+  html:
+    theme: [cosmo, styles.scss]
